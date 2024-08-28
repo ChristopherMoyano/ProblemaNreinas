@@ -8,6 +8,8 @@ def CrearPoblacion(n, p):
         np.random.shuffle(Poblacion[i])
     return Poblacion
 
+def Fitness(Poblacion,n,p):
+    fitness= np.zeros(p,int)
 if len(sys.argv)==7:
     semilla = int(sys.argv[1])
     n = int(sys.argv[2]) #tamaño del tablero y cantidad de reinas
