@@ -8,8 +8,20 @@ def CrearPoblacion(n, p):
         np.random.shuffle(Poblacion[i])
     return Poblacion
 
-def Fitness(Poblacion,n,p):
+def ContarFitness(Poblacion,n,p):
     fitness= np.zeros(p,int)
+    for i in range(p):
+        contador = 0
+        for j in range(n):
+            for k in range(j+1,n,1):
+                if((Poblacion[i][j]+j) == (Poblacion[i][k]+k)):
+                    contador +=1
+                if((Poblacion[i][j]-j) == Poblacion[i][k]-k):
+                    contador+=1
+        fitness[i] = contador
+    return fitness
+
+
 if len(sys.argv)==7:
     semilla = int(sys.argv[1])
     n = int(sys.argv[2]) #tamaño del tablero y cantidad de reinas
@@ -27,6 +39,8 @@ np.random.seed(semilla)
 
 Poblacion = CrearPoblacion(n,p)
 print(Poblacion)
+Fitness = ContarFitness(Poblacion,n,p)
+print(Fitness)
 
 
 
