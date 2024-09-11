@@ -29,22 +29,39 @@ def CrearRuleta(Fitness,p):
         Ruleta[i] = Ruleta[i-1]+proporcion[i]
     return Ruleta
 
-def NuevaPoblacion(Poblacion,Ruleta,n,p):
-    i = 0
-    contador = 0
+def eleccionPadres(Ruleta):
     random = np.random.rand()
-    NuevaPoblacion = np.zeros((p,n),int)
-    individuo1 = np.zeros(n,int)
-    individuo2 = np.zeros(n,int)
-    while random<Ruleta[i] and contador<2:
-        if(random>Ruleta[i] and contador==0):
-            individuo1 = Poblacion[i]
-            contador+=1
+    i=0
+    contador=0
+    padre1 = 0
+    padre2 = 0
+    while(random > Ruleta[i] or contador <2):
+        if(random < Ruleta[i] and contador == 0):
+            padre1 = i
+            contador +=1
+            random = np.random.rand()
             i=0
-        elif(random>Ruleta[i] and contador==1)
-            individuo2=Poblacion[i]
-            contador+=1
+        elif(random < Ruleta[i] and contador ==1 and padre1!=i):
+            padre2 = i
+            contador +=1
+        elif(random < Ruleta[i] and contador ==1 and padre1 == i):
+            random = np.random.rand()
+            i=0
+        else:
+            i+=1
+    return padre1,padre2
 
+
+
+            
+
+################cruza del profe################################
+
+#pto_corte = np.random.randint(1,n)
+
+#hijo11 = padre1[:pto_corte]
+#hijo12 = padre2[pto_corte:]
+#hijo1 = np.concatenate([hijo11,hijo12])
 
 
 
