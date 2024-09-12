@@ -51,19 +51,17 @@ def eleccionPadres(Ruleta):
             i+=1
     return padre1,padre2
 
+def cruza(padre1,padre2):
+    pto_corte=np.random.randint(1,n)
+    hijo11=padre1[:pto_corte]
+    hijo12=padre2[pto_corte:]
+    hijo1=np.concatenate([hijo11,hijo12])
+    hijo21=padre1[pto_corte:]
+    hijo22=padre2[:pto_corte]
+    hijo2=np.concatenate([hijo21,hijo22])
 
-
-            
-
-################cruza del profe################################
-
-#pto_corte = np.random.randint(1,n)
-
-#hijo11 = padre1[:pto_corte]
-#hijo12 = padre2[pto_corte:]
-#hijo1 = np.concatenate([hijo11,hijo12])
-
-
+def mutacion(hijo1,n):
+    intercambiar = np.random.choice(n,size=2,replace=False)
 
 if len(sys.argv)==7:
     semilla = int(sys.argv[1])
@@ -86,8 +84,8 @@ Fitness = ContarFitness(Poblacion,n,p)
 print(Fitness)
 Ruleta=CrearRuleta(Fitness,p)
 print(Ruleta)
-random = np.random.rand()
-print(random)
+Padres = eleccionPadres(Ruleta)
+print(Padres)
 
 
 
