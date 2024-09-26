@@ -18,10 +18,10 @@ def ContarFitness(Poblacion,n,p):
                     contador +=1
                 if((Poblacion[i][j]-j) == Poblacion[i][k]-k):
                     contador+=1
-        if (contador != 0):
-            fitness[i] = (1/contador)
+        if(contador!=0):
+            fitness[i]=(1/(contador+1))
         else:
-            fitness[i] = 1
+            fitness[i]=1
     return fitness
 
 def CrearRuleta(Fitness,p):
@@ -68,13 +68,15 @@ def cruza(padre1,padre2):
     m2 = np.zeros_like(hijo2, dtype=bool)
     m1[np.unique(hijo1, return_index = True)[1]] = True
     m2[np.unique(hijo2, return_index = True)[1]] = True
+    aux1 = hijo1
+    aux2 = hijo2
     for i in range(hijo1[~m1].size):
         repe1_idx = np.where(hijo1 == hijo1[~m1][i])
-        repe2_idx = np.where(hijo2 == hijo2[~m1][i])
+        repe2_idx = np.where(hijo2 == hijo2[~m2][i])
         idx = np.random.randint(2)
-        aux = hijo1[repe1_idx[idx]]
-        hijo1[repe1_idx[idx]] = hijo2[repe2_idx[np.absolute(idx-1)]]
-        hijo2[repe2_idx[np.absolute(idx-1)]]=aux
+        aux = hijo1[repe1_idx[0][idx]]
+        hijo1[repe1_idx[0][idx]] = hijo2[repe2_idx[0][np.absolute(idx-1)]]
+        hijo2[repe2_idx[0][np.absolute(idx-1)]]=aux
 
     return hijo1,hijo2
 
@@ -125,15 +127,19 @@ while (generacion < ite) and ~np.any(Fitness == 1):
     Poblacion = nuevaPoblacion
     Fitness = ContarFitness(Poblacion,n,p)
     Ruleta = CrearRuleta(Fitness,p)
+    print("una de las mejores soluciones de la generacion",(generacion+1),"es:")
+    indice = np.where(Fitness == np.max(Fitness))[0]
+    print(Poblacion[indice[0]])
+    generacion+=1
                  
 if (np.any(Fitness==1)):
     indices = np.where(Fitness == 1)[0]
-    print("La mejor solucion encontrada es:")
+    print("La mejor solucion fue encontrada en la generacion",generacion,"esta es :")
     for i in indices:
         print(Poblacion[i])
 else:
     indices = np.where(Fitness == np.max(Fitness))[0]
-    print("no se encontro una solucion precisa, la más cercana es: ")
+    print("no se encontro una solucion precisa :c con las",generacion,"generaciones, la más cercana es: ")
     for i in indices:
         print(Poblacion[i])
     
