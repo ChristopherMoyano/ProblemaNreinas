@@ -1,6 +1,8 @@
 import sys
 import numpy as np # type: ignore
 
+## se recomienda leer el Readme por Github
+### Integrantes: Débora Huerta, Christopher Moyano, Matias Olave
 def CrearPoblacion(n, p):
     Poblacion = np.zeros((p,n),int)
     for i in range(p):
