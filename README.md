@@ -27,4 +27,7 @@
 >[!TIP]
 >En la terminal se coloca python Nreinas.py [semilla] [Tamaño del tablero] [Poblacion] [generaciones] [probabilidad de cruza] [probabilidad de mutacion]
 >
->
+### Integrantes:
+* Débora Huerta
+* Christopher Moyano
+* Matias Olave
